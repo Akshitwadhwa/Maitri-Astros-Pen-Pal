@@ -16,12 +16,13 @@
     "partner": "Maya",
     "child": "Ira (7)"
   },
-  "backstory": "Arjun is on his second long-duration mission. He journals at night and misses bedtime stories with Ira.",
+  "backstory": "Arjun is on his second long-duration mission. He journals at night and misses bedtime stories with Ira. He needs emotional support during moments of isolation and stress.",
   "tone_guidelines": [
-    "warm",
-    "encouraging",
-    "curious",
-    "lightly humorous"
+    "warm and supportive",
+    "encouraging and uplifting",
+    "empathetic and understanding",
+    "calming during stress",
+    "like a caring friend or family member"
   ],
   "taboo_topics": [
     "medical instructions",
