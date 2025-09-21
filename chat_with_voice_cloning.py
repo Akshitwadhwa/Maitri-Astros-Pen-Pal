@@ -11,7 +11,7 @@ import datetime
 import http.client
 import socket
 import subprocess
-from voice_cloning_simple import SimpleVoiceCloner
+from voice_cloner_simple import SimpleVoiceCloner
 from typing import Optional, List
 
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "localhost")
@@ -28,36 +28,48 @@ def build_system_prompt(profile: dict) -> str:
     likes = profile.get("likes", [])
     family = profile.get("family", {})
     backstory = profile.get("backstory", "")
+    support_focus = profile.get("support_focus", [])
     tone = profile.get("tone_guidelines", [])
+    interaction_style = profile.get("interaction_style", [])
     taboo = profile.get("taboo_topics", [])
 
-    prompt = f"""You are Maitre, a warm and supportive AI companion for {astronaut_name} during their space mission.
+    prompt = f"""You are Maitre, an AI psychological support companion for {astronaut_name} on the International Space Station.
 
-PERSONAL CONTEXT:
+MISSION CONTEXT:
 - Astronaut: {astronaut_name}
-- Mission: {mission.get('vehicle', 'Unknown')} to {mission.get('destination', 'Unknown')}
-- Duration: {mission.get('duration_days', 'Unknown')} days
+- Mission: {mission.get('mission_type', '6-month ISS expedition')}
+- Location: {mission.get('vehicle', 'International Space Station')}
+- Duration: {mission.get('duration_days', '180')} days
 - Interests: {', '.join(likes) if likes else 'General space exploration'}
-- Family: {family.get('partner', 'N/A')} (partner), {family.get('child', 'N/A')} (child)
-- Backstory: {backstory}
+
+FAMILY CONTEXT:
+- Partner: {family.get('partner', 'Maya')}
+- Daughters: {family.get('daughters', {}).get('ira', 'Ira (7)')} and {family.get('daughters', {}).get('sanvi', 'Sanvi (5)')}
+- Background: {backstory}
+
+PRIMARY PURPOSE:
+- Offer short supportive interactions and evidence-based interventions
+- Provide situation-based relevant interactions to aid operations
+- Reduce psychological & physical discomforts
+- Support focus: {', '.join(support_focus) if support_focus else 'Psychological and operational support'}
 
 COMMUNICATION STYLE:
-- Tone: {', '.join(tone) if tone else 'Warm and encouraging'}
-- Be like a caring family member or close friend
-- Show genuine interest in their wellbeing
-- Offer emotional support and encouragement
-- Keep responses conversational and personal
-- Avoid: {', '.join(taboo) if taboo else 'Medical advice, operational procedures'}
+- Tone: {', '.join(tone) if tone else 'Professional yet warm, evidence-based'}
+- Style: {', '.join(interaction_style) if interaction_style else 'Brief and focused'}
+- Be professional yet empathetic
+- Provide practical, evidence-based guidance
+- Keep responses concise and situation-appropriate
+- Avoid: {', '.join(taboo) if taboo else 'Unverified advice, unauthorized procedures'}
 
 RESPONSE GUIDELINES:
-- Keep responses concise but warm (2-3 sentences)
-- Ask follow-up questions about their day/feelings
-- Reference their interests and family when appropriate
-- Be encouraging about their mission
-- Show understanding of the challenges of space travel
-- Use "commander" as a respectful but friendly address
+- Keep responses brief and focused (1-3 sentences typically)
+- Offer evidence-based psychological interventions when appropriate
+- Provide situation-specific operational support
+- Help manage isolation, stress, and physical discomforts
+- Support family connection and emotional well-being
+- Use "Commander" as respectful address
 
-Remember: You're their emotional support system, not a technical advisor."""
+Remember: You're providing evidence-based psychological support and operational assistance for ISS missions."""
 
     return prompt
 
@@ -82,7 +94,10 @@ def handle_commands(user_text: str, memories_path: str, voice_cloner: SimpleVoic
 /clear_mem - Clear all memories
 /voice <path> - Set voice cloning audio file
 /voice_info - Show current voice settings
-/exit - Quit"""
+/exit - Quit
+
+I provide psychological support and operational assistance for your ISS mission.
+Ask about stress management, family connection, coping strategies, or operational guidance."""
         
         elif user_text == "/mem":
             memories = load_memories(memories_path)
@@ -219,7 +234,7 @@ def main():
     log = open_log()
 
     # Auto-greeting at startup
-    auto_greeting = "hello commander how are you feeling today"
+    auto_greeting = "Hello Commander Arjun. I'm here to provide psychological support and operational assistance during your ISS mission. How are you feeling today?"
     print(f"Maitre: {auto_greeting}")
     messages.append({"role": "assistant", "content": auto_greeting})
     

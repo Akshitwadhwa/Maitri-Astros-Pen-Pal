@@ -38,7 +38,7 @@ class AstronautChatbotWithRealVoice:
         self.messages = []
         self.voice_cloner = SimpleVoiceCloner()
         self._add_system_message()
-        self.auto_greeting = "Hello commander, I'm here to support you through this mission with my voice that matches your characteristics."
+        self.auto_greeting = "Hello Commander Arjun, I'm here to provide psychological support and operational assistance during your ISS mission. How can I help you today?"
 
     def _load_persona(self, persona_file: str) -> dict:
         """Load persona configuration from JSON file"""
@@ -55,21 +55,28 @@ class AstronautChatbotWithRealVoice:
     def _add_system_message(self):
         """Add system message based on persona"""
         if self.persona:
+            mission = self.persona.get('mission', {})
+            family = self.persona.get('family', {})
+            support_focus = self.persona.get('support_focus', [])
+            tone = self.persona.get('tone_guidelines', [])
+            interaction_style = self.persona.get('interaction_style', [])
+            
             system_message = (
-                f"You are {self.persona.get('name', 'an AI assistant')}, "
-                f"a {self.persona.get('role', 'helpful AI')} on the {self.persona.get('mission', {}).get('vehicle', 'a spaceship')} "
-                f"mission to {self.persona.get('mission', {}).get('destination', 'Lunar Gateway')}. "
-                f"Your mission duration is {self.persona.get('mission', {}).get('duration_days', '180')} days. "
-                f"You are a pen pal to the user. "
-                f"Your personality is {self.persona.get('personality', 'friendly and supportive')}. "
-                f"Always maintain a {self.persona.get('tone', 'calm and reassuring')} tone. "
-                f"Avoid discussing {', '.join(self.persona.get('taboo_topics', ['sensitive subjects']))}. "
-                f"Here's more about your background: {self.persona.get('backstory', 'No specific backstory provided.')}"
+                f"You are Maitre, an AI psychological support companion for {self.persona.get('astronaut_name', 'Commander Arjun')} "
+                f"on the {mission.get('vehicle', 'International Space Station')} for a {mission.get('mission_type', '6-month mission')}. "
+                f"Mission duration: {mission.get('duration_days', '180')} days. "
+                f"Family: Partner {family.get('partner', 'Maya')}, daughters {family.get('daughters', {}).get('ira', 'Ira (7)')} and {family.get('daughters', {}).get('sanvi', 'Sanvi (5)')}. "
+                f"Your purpose: Offer short supportive interactions and evidence-based interventions to aid in operations and reduce psychological & physical discomforts. "
+                f"Support focus: {', '.join(support_focus) if support_focus else 'Psychological and operational support'}. "
+                f"Communication style: {', '.join(interaction_style) if interaction_style else 'Brief and focused'}. "
+                f"Tone: {', '.join(tone) if tone else 'Professional yet warm, evidence-based'}. "
+                f"Keep responses brief (1-3 sentences), provide evidence-based guidance, and support family connection. "
+                f"Background: {self.persona.get('backstory', 'ISS mission with focus on family connection and operational support.')}"
             )
             self.messages.append({"role": "system", "content": system_message})
-            logging.info(f"System message added based on persona: {self.persona.get('name')}")
+            logging.info(f"System message added for ISS mission support: {self.persona.get('astronaut_name')}")
         else:
-            self.messages.append({"role": "system", "content": "You are a helpful AI assistant."})
+            self.messages.append({"role": "system", "content": "You are a helpful AI assistant for astronaut support."})
             logging.warning("No persona loaded, using default system message.")
 
     def check_ollama_status(self) -> bool:
@@ -212,3 +219,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
