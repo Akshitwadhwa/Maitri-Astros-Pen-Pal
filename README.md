@@ -1,14 +1,16 @@
 # Maitre Voice Interaction Workflow
 
-A complete voice-to-voice AI system designed for astronauts, featuring a local Llama 3 chatbot with family member voice synthesis.
+A complete voice-to-voice AI psychological support system for astronauts on the International Space Station, featuring evidence-based interventions and operational assistance.
 
 ## Features
 
+- **Psychological Support**: Evidence-based interventions for stress, isolation, and emotional well-being
+- **Operational Assistance**: Situation-based guidance to aid ISS operations
+- **Family Connection Support**: Help managing separation from loved ones
 - **Offline Llama 3 Chatbot**: Local AI conversation using Ollama
-- **Family Member Voice**: Custom voice synthesis using macOS TTS with voice modifications
-- **Astronaut Persona**: Personalized responses based on astronaut profile
-- **Memory System**: Persistent conversation memory
-- **Real-time Speech**: Text-to-speech with voice cloning
+- **Voice Synthesis**: Custom voice synthesis using macOS TTS with voice modifications
+- **Astronaut Persona**: Personalized responses for Commander Arjun Mehta's ISS mission
+- **Memory System**: Persistent conversation memory for continuity of care
 
 ## Quick Start
 
@@ -76,33 +78,49 @@ cloner.set_voice_characteristics(
 )
 ```
 
-## Persona Customization
+## Current Mission Profile
 
-Edit `persona/astronaut.json` to match your astronaut:
+The system is configured for Commander Arjun Mehta's ISS mission:
 
 ```json
 {
   "astronaut_name": "Commander Arjun Mehta",
-  "callsign": "Vimana",
   "mission": {
-    "vehicle": "Orion",
-    "destination": "Lunar Gateway",
-    "duration_days": 180
+    "vehicle": "International Space Station",
+    "destination": "ISS",
+    "duration_days": 180,
+    "mission_type": "6-month ISS expedition"
   },
   "family": {
     "partner": "Maya",
-    "child": "Ira (7)"
-  }
+    "daughters": {
+      "ira": "7 years old",
+      "sanvi": "5 years old"
+    }
+  },
+  "support_focus": [
+    "evidence-based psychological interventions",
+    "situation-based operational guidance",
+    "family connection support"
+  ]
 }
 ```
 
 ## Commands
 
-- `/help` - Show available commands
-- `/mem` - List memories
-- `/remember <note>` - Add a memory
+- `/help` - Show available commands and support options
+- `/mem` - List memories and previous interactions
+- `/remember <note>` - Add important information to memory
 - `/clear_mem` - Clear all memories
 - `/exit` - Quit the chatbot
+
+## Support Areas
+
+- **Psychological Support**: Stress management, isolation coping, emotional regulation
+- **Family Connection**: Managing separation from Ira and Sanvi, maintaining bonds
+- **Operational Guidance**: Situation-based assistance for ISS operations
+- **Physical Comfort**: Evidence-based strategies for physical discomforts
+- **Sleep & Routine**: Support for maintaining healthy routines in space
 
 ## File Structure
 
@@ -164,3 +182,5 @@ tts.tts_to_file(
 ## License
 
 MIT License - Feel free to modify and use for your projects.
+
+
