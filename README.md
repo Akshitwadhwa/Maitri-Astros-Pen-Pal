@@ -1,4 +1,4 @@
-# Maitre Voice Interaction Workflow
+# Maitre -- Astronauts Pen Pal
 
 A complete voice-to-voice AI psychological support system for astronauts on the International Space Station, featuring evidence-based interventions and operational assistance.
 
