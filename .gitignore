@@ -48,6 +48,9 @@ Thumbs.db
 models/
 datasets/
 
+# Google Cloud credentials
+your_google_credentials.json
+
 # Temporary files
 *.tmp
 *.temp
