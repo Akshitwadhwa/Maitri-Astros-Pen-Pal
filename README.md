@@ -1,5 +1,12 @@
 # Maitre -- Astronauts Pen Pal
 
+<p align="center">
+  <img src="assets/maitre-hero.png" alt="Maitre — Astronauts Pen Pal" width="800">
+  <br/>
+  <em>Drop your image at <code>assets/maitre-hero.png</code> or update the path above.</em>
+  
+</p>
+
 A complete voice-to-voice AI psychological support system for astronauts on the International Space Station, featuring evidence-based interventions and operational assistance.
 
 ## Features
