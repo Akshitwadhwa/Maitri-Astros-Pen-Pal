@@ -1,7 +1,7 @@
 # Maitre -- Astronauts Pen Pal
 
 <p align="center">
-  <img src="assets/maitre-hero.png" alt="Maitre — Astronauts Pen Pal" width="800">
+  <img src="assets/maitriflow.png" alt="Maitre — Astronauts Pen Pal" width="800">
   <br/>
   <em>Drop your image at <code>assets/maitre-hero.png</code> or update the path above.</em>
   
