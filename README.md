@@ -149,21 +149,6 @@ hackthon/
 - `OLLAMA_HOST=localhost` - Ollama server host
 - `OLLAMA_PORT=11434` - Ollama server port
 
-## Troubleshooting
-
-**No voice output:**
-- Check if `USE_TTS=1` is set
-- Verify macOS TTS is working: `say "test"`
-- Check voice permissions in System Preferences
-
-**Model not responding:**
-- Ensure Ollama is running: `ollama list`
-- Try smaller model: `MODEL=gemma3:1b`
-- Check Ollama service: `curl http://localhost:11434/api/version`
-
-**Memory issues:**
-- Check `storage/` directory permissions
-- Verify JSON format in `memories.json`
 
 ## Advanced Voice Cloning
 
